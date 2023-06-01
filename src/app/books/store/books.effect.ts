@@ -29,6 +29,7 @@ export class BooksEffect {
         this.actions$.pipe(
             ofType(invokeBooksAPI),
             switchMap(() => {
+                console.log('Invoked AllBooks$');
                 return this.booksService.getBooks().pipe(map((data) => booksFetchAPISuccess({ allBooks: data })));
             })
         )
