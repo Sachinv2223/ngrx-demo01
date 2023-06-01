@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { Books } from "../store/books";
-import { booksFetchAPISuccess, saveNewBookAPISucess, updateBookAPISucess } from "./books.action";
+import { booksFetchAPISuccess, deleteBookAPISuccess, saveNewBookAPISucess, updateBookAPISucess } from "./books.action";
 
 export const initialState: ReadonlyArray<Books> = [];
 
@@ -26,5 +26,10 @@ on(updateBookAPISucess, (state: Books[], { updateBook }) => {
   // return newState;
   let newState = [...state.filter((book: Books) => book.id != updateBook.id)];
   newState.unshift(updateBook);
+  return newState;
+})
+
+on(deleteBookAPISuccess, (state: Books[], { id }) => {
+  let newState = [...state.filter((book: Books) => book.id != id)];
   return newState;
 })

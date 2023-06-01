@@ -4,12 +4,6 @@
       "id": 1,
       "name": "Harry Potter and Philosiphers Stone",
       "author": "J K Rowling",
-      "cost": 500
-    },
-    {
-      "id": 2,
-      "author": "A P J Abdul Kalam",
-      "name": "Wings of Fire",
       "cost": 300
     },
     {
@@ -17,18 +11,6 @@
       "author": "Radhakrishnan",
       "name": "Mazhavil",
       "cost": 200
-    },
-    {
-      "id": 4,
-      "author": "Tha",
-      "name": "Thingla",
-      "cost": 120
-    },
-    {
-      "id": 5,
-      "author": "facebook",
-      "name": "Meta",
-      "cost": 400
     },
     {
       "id": 6,

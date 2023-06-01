@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { BooksService } from "../books.service";
 import { Store, select } from "@ngrx/store";
 import { EMPTY, map, mergeMap, switchMap, withLatestFrom } from "rxjs";
-import { booksFetchAPISuccess, invokeBooksAPI, invokeSaveNewBookAPI, invokeUpdateBookAPI, saveNewBookAPISucess, updateBookAPISucess } from "./books.action";
+import { booksFetchAPISuccess, deleteBookAPISuccess, invokeBooksAPI, invokeDeleteBookAPI, invokeSaveNewBookAPI, invokeUpdateBookAPI, saveNewBookAPISucess, updateBookAPISucess } from "./books.action";
 import { selectBooks } from "./books.selector";
 import { Appstate } from "src/app/shared/store/appstate";
 import { setAPIStatus } from "src/app/shared/store/app.action";
@@ -29,7 +29,6 @@ export class BooksEffect {
         this.actions$.pipe(
             ofType(invokeBooksAPI),
             switchMap(() => {
-                console.log('Invoked AllBooks$');
                 return this.booksService.getBooks().pipe(map((data) => booksFetchAPISuccess({ allBooks: data })));
             })
         )
@@ -59,6 +58,23 @@ export class BooksEffect {
                     map((data) => {
                         this.appStore.dispatch(setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: 'success' } }));
                         return updateBookAPISucess({ updateBook: data });
+                    })
+                );
+            })
+        );
+    });
+
+    deleteBooksAPI$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(invokeDeleteBookAPI),
+            switchMap((actions) => {
+                this.appStore.dispatch(
+                    setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
+                );
+                return this.booksService.deleteBook(actions.id).pipe(
+                    map(() => {
+                        this.appStore.dispatch(setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: 'success' } }));
+                        return deleteBookAPISuccess({ id: actions.id });
                     })
                 );
             })

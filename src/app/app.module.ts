@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { appReducer } from './shared/store/app.reducer';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { appReducer } from './shared/store/app.reducer';
       maxAge: 50, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
     }),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
